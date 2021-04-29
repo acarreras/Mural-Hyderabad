@@ -1,9 +1,11 @@
-int colors[] = {#FAAE7E, #f7803c, #ed4627, #2e0d23, #f8e4c1 };
+int colors[] = {#FAAE7E, #f7803c, #ed4627, #2e0d23, #f8e4c1};
 color c1 = colors[0];
 color c2 = colors[1];
 color c3 = colors[2];
 color c4 = colors[3];
 color c5 = colors[4];
+
+ArrayList<Rectangles> rects = new ArrayList<Rectangles>();
 
 void setup() {
   size(1340, 510); // 670cm x 255cm
@@ -129,10 +131,11 @@ void trocetL(float m, float m50, float m25, float m23, float m13){
   // decoracions
   fill(cc3);
   noStroke();
-  arc(m25,m25, m13,m13, radians(45), radians(225));
-  arc(m-m25,m25, m13,m13, radians(45), radians(225));
-  arc(m-m25,m-m25, m13,m13, radians(45), radians(225));
-  arc(m25,m-m25, m13,m13, radians(45), radians(225));
+  circle(m25+m13*0.5*cos(radians(45)),m25+m13*0.5*sin(radians(45)), m13*0.25);
+  circle(m25+m13*0.5*cos(radians(90)),m25+m13*0.5*sin(radians(90)), m13*0.25);
+  circle(m25+m13*0.5*cos(radians(135)),m25+m13*0.5*sin(radians(135)), m13*0.25);
+  circle(m25+m13*0.5*cos(radians(180)),m25+m13*0.5*sin(radians(180)), m13*0.25);
+  circle(m25+m13*0.5*cos(radians(225)),m25+m13*0.5*sin(radians(225)), m13*0.25);
   popStyle();
 }
 
@@ -222,4 +225,37 @@ void trocetV(float m, float m50, float m25, float m23, float m13){
   fill(cc2);
   ellipse(m25,m25, m13*0.5,m13*0.5);
   popStyle();
+}
+
+class Rectangle {
+  float rX;
+  float rY;
+  float rW;
+  float rH;
+  float cX;
+  float cY;
+  
+  Rectangle(float x, float y, float w, float h){
+    rX = x;
+    rY = y;
+    rW = w;
+    rH = h;
+    cX = rX + rW*0.5;
+    cY = rY + rH*0.5;
+  }
+  
+  float getCx(){ // centre x
+    return cX;
+  }
+  
+  float getCy(){ // centre y
+    return cY;
+  }
+  
+  void drawR(){ // debug
+    noFill();
+    stroke(255,255,0);
+    strokeWeight(0.5);
+    rect(rX,rY, rW,rH);
+  }
 }
