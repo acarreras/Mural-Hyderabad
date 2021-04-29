@@ -5,27 +5,60 @@ color c3 = colors[2];
 color c4 = colors[3];
 color c5 = colors[4];
 
-ArrayList<Rectangles> rects = new ArrayList<Rectangles>();
+int mida = 134;
+int quantiW = 9;
+int quantiH = 3;
+ArrayList<Rectangle> zones = new ArrayList<Rectangle>();
 
 void setup() {
   size(1340, 510); // 670cm x 255cm
   frameRate(8);
+  
+  for(int i=0; i<quantiW; i++){
+    for(int j=0; j<quantiH; j++){
+      zones.add(new Rectangle(i*mida,j*mida, mida,mida));
+    }
+  }
+  
+  for (int i=zones.size()-1; i>= 0; i--){
+    Rectangle z = zones.get(i);
+    if (random(1) > 0.5) { // subdivideix
+      zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.remove(i);  
+    }
+  } 
+  
+  for (int i=zones.size()-1; i>= 0; i--){
+    Rectangle z = zones.get(i);
+    if (random(1) > 0.8) { // subdivideix
+      zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.remove(i);  
+    }
+  } 
 }
 
 void draw() {
   background(c1);
-  noStroke();
-  noFill();
-  strokeWeight(4);
-  int mida = 51;
-  for(int i=0; i<25; i++){
-    for(int j=0; j<9; j++){
-      pushMatrix();
-      translate(i*mida+mida*0.1,j*mida);
-      trocet(2*mida, (int)random(0,4));
-      popMatrix();
-    }
-  }
+  
+  for(int i=0; i<zones.size(); i++) {
+    Rectangle z = zones.get(i);
+    
+    pushMatrix();
+    translate(z.x, z.y);
+    noStroke();
+    noFill();
+    strokeWeight(4);
+    trocet(2*z.w, (int)random(2,4));
+    popMatrix();
+  
+    //z.drawR(); // debug
+  } 
 }
 
 void keyPressed() {
@@ -34,7 +67,7 @@ void keyPressed() {
   else if (key == '+') desplacaColorsEndavant();
   else if (key == '-') desplacaColorsEnrera();
   else if (key == ' ') {
-    efectePaper(0,0, width,height, 40);
+    //efectePaper(0,0, width,height, 40);
     pantallazo();
   }
 }
@@ -113,48 +146,58 @@ void trocet(float m, int n){
 }
 
 void trocetL(float m, float m50, float m25, float m23, float m13){
-  color cc1 = c3;
-  color cc2 = c4;
-  color cc3 = c5;
+  color cc1 = c4;
+  color cc2 = c1;
+  color cc3 = c2;
+  color cc4 = c5;
   pushStyle();
   noStroke();
   fill(cc1);
+  rect(m25,m25, m50,m50);
+  fill(cc2);
   ellipse(m25,m25, m23,m23);
   ellipse(m-m25,m25, m23,m23);
   ellipse(m-m25,m-m25, m23,m23);
   ellipse(m25,m-m25, m23,m23);
   strokeWeight(m13);
-  stroke(cc2);
+  stroke(cc3);
   noFill();
   arc(m-m25,m25, m50,m50, radians(90),radians(180));
   arc(m25,m-m25, m50,m50, radians(270),radians(360));
   // decoracions
-  fill(cc3);
+  fill(cc4);
   noStroke();
-  circle(m25+m13*0.5*cos(radians(45)),m25+m13*0.5*sin(radians(45)), m13*0.25);
-  circle(m25+m13*0.5*cos(radians(90)),m25+m13*0.5*sin(radians(90)), m13*0.25);
-  circle(m25+m13*0.5*cos(radians(135)),m25+m13*0.5*sin(radians(135)), m13*0.25);
-  circle(m25+m13*0.5*cos(radians(180)),m25+m13*0.5*sin(radians(180)), m13*0.25);
-  circle(m25+m13*0.5*cos(radians(225)),m25+m13*0.5*sin(radians(225)), m13*0.25);
+  float d = m13*0.7;
+  // decoració sobre m-m25,m-m25 n'apareixen menys
+  if(m >= mida){
+    circle(m-m25+d*cos(radians(45)),m25+d*sin(radians(45)), m13*0.2);
+    circle(m-m25+d*cos(radians(90)),m25+d*sin(radians(90)), m13*0.2);
+    circle(m-m25+d*cos(radians(135)),m25+d*sin(radians(135)), m13*0.2);
+    circle(m-m25+d*cos(radians(180)),m25+d*sin(radians(180)), m13*0.2);
+    circle(m-m25+d*cos(radians(225)),m25+d*sin(radians(225)), m13*0.2);
+  }
   popStyle();
 }
 
 void trocetR(float m, float m50, float m25, float m23, float m13){
   color cc1 = c4;
-  color cc2 = c5;
+  color cc2 = c1;
   color cc3 = c2;
+  color cc4 = c5;
   pushStyle();
   fill(cc1);
+  rect(m25,m25, m50,m50);
+  fill(cc2);
   ellipse(m25,m25, m23,m23);
   ellipse(m-m25,m25, m23,m23);
   ellipse(m-m25,m-m25, m23,m23);
   ellipse(m25,m-m25, m23,m23);
   strokeWeight(m13);
-  stroke(cc2);
+  stroke(cc3);
   arc(m-m25,m-m25, m50,m50, radians(180),radians(270));
   arc(m25,m25, m50,m50, radians(0),radians(90));
   // decoracions
-  fill(cc3);
+  fill(cc4);
   noStroke();
   circle(m25,m25, m13*0.5);
   circle(m-m25,m25, m13*0.5);
@@ -164,25 +207,27 @@ void trocetR(float m, float m50, float m25, float m23, float m13){
 }
 
 void trocetH(float m, float m50, float m25, float m23, float m13){
-  color cc1 = c2;
-  color cc2 = c3;
-  color cc3 = c5;
-  color cc4 = c4;
+  color cc1 = c4;
+  color cc2 = c1;
+  color cc3 = c2;
+  color cc4 = c5;
   pushStyle();
   fill(cc1);
+  rect(m25,m25, m50,m50);
+  fill(cc2);
   ellipse(m25,m25, m23,m23);
   ellipse(m-m25,m25, m23,m23);
   ellipse(m-m25,m-m25, m23,m23);
   ellipse(m25,m-m25, m23,m23);
   strokeWeight(m13);
-  stroke(cc2);
+  stroke(cc3);
   line(m25,m50, m-m25,m50);
-  fill(cc2);
+  fill(cc3);
   noStroke();
   ellipse(m50,m25, m13,m13);
   ellipse(m50,m-m25, m13,m13);
   // decoracions
-  fill(cc3);
+  fill(cc4);
   noStroke();
   circle(m25,m25, m13*0.5);
   circle(m-m25,m25, m13*0.5);
@@ -198,50 +243,54 @@ void trocetH(float m, float m50, float m25, float m23, float m13){
 }
 
 void trocetV(float m, float m50, float m25, float m23, float m13){
-  color cc1 = c3;
-  color cc2 = c5;
-  color cc3 = c4;
+  color cc1 = c4;
+  color cc2 = c1;
+  color cc3 = c2;
+  color cc4 = c5;
+  color cc5 = c3;
   pushStyle();
   fill(cc1);
+  rect(m25,m25, m50,m50);
+  fill(cc2);
   rect(m25,m25, m50,m50);
   ellipse(m25,m25, m23,m23);
   ellipse(m-m25,m25, m23,m23);
   ellipse(m-m25,m-m25, m23,m23);
   ellipse(m25,m-m25, m23,m23);
   strokeWeight(m13);
-  stroke(cc2);
+  stroke(cc3);
   line(m50,m25, m50,m-m25);
-  fill(cc2);
+  fill(cc3);
   noStroke();
   ellipse(m25,m50, m13,m13);
   ellipse(m-m25,m50, m13,m13);
   // decoracions
-  fill(cc3);
+  fill(cc4);
   noStroke();
   circle(m50,lerp(m25,m-m25,0.25), m13*0.35);
   circle(m50,lerp(m25,m-m25,0.5), m13*0.35);
   circle(m50,lerp(m25,m-m25,0.75), m13*0.35);
   // decoracions++
-  fill(cc2);
+  fill(cc5);
   ellipse(m25,m25, m13*0.5,m13*0.5);
   popStyle();
 }
 
 class Rectangle {
-  float rX;
-  float rY;
-  float rW;
-  float rH;
+  float x;
+  float y;
+  float w;
+  float h;
   float cX;
   float cY;
   
-  Rectangle(float x, float y, float w, float h){
-    rX = x;
-    rY = y;
-    rW = w;
-    rH = h;
-    cX = rX + rW*0.5;
-    cY = rY + rH*0.5;
+  Rectangle(float _x, float _y, float _w, float _h){
+    x = _x;
+    y = _y;
+    w = _w;
+    h = _h;
+    cX = x + w*0.5;
+    cY = y + h*0.5;
   }
   
   float getCx(){ // centre x
@@ -256,6 +305,6 @@ class Rectangle {
     noFill();
     stroke(255,255,0);
     strokeWeight(0.5);
-    rect(rX,rY, rW,rH);
+    rect(x,y, w,h);
   }
 }

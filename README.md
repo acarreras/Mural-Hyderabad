@@ -1,6 +1,8 @@
 # Mural
 Generative mural drawing created with code and love.
+
 Anna Carrers, Barcelona.
+
 [wwww.annacarreras.com](wwww.annacarreras.com)
 
 ## Code
