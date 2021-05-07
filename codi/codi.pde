@@ -1,3 +1,5 @@
+import processing.svg.*;
+
 int colors[] = {#FAAE7E, #5F1B49, #ed4627, #2e0d23, #FFF5E3};
 color c1 = colors[0];
 color c2 = colors[1];
@@ -6,52 +8,16 @@ color c4 = colors[3];
 color c5 = colors[4];
 
 int mida = 134;
-int quantiW = 9;
+int quantiW = 5;
 int quantiH = 3;
 ArrayList<Rectangle> zones = new ArrayList<Rectangle>();
 
 void setup() {
   size(1340, 510); // 670cm x 255cm
-  frameRate(8);
+  //frameRate(8);
   
-  // crea zones
-  for(int i=0; i<quantiW; i++){
-    for(int j=0; j<quantiH; j++){
-      zones.add(new Rectangle(i*mida,j*mida, mida,mida));
-    }
-  }
-  
-  for (int i=zones.size()-1; i>= 0; i--){
-    Rectangle z = zones.get(i);
-    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 0.9,0.);
-    z.prob = prob;
-    if (random(1) > prob) { // subdivideix
-      zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
-      zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
-      zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
-      zones.add(new Rectangle(z.x+z.w*0.5,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
-      zones.remove(i);  
-    }
-  } 
-  for (int i=zones.size()-1; i>= 0; i--){
-    Rectangle z = zones.get(i);
-    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 0.8,0.);
-    z.prob = prob;
-    if (random(1) > prob) { // subdivideix
-      zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
-      zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
-      zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
-      zones.add(new Rectangle(z.x+z.w*0.5,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
-      zones.remove(i);  
-    }
-  }
-  
-  // assigna trocet
-  for(int i=0; i<zones.size(); i++) {
-    Rectangle z = zones.get(i);
-    z.quin = (int)random(0,4);
-  }
-  
+  creaZones();
+  assignaTrocet();
   desplacaColorsEnrera();
 }
 
@@ -71,6 +37,31 @@ void draw() {
   
     //z.drawR(); // debug
   }
+
+  // simetria perfecta
+  PImage mig = get(0,0, int(width*0.5), height);
+  pushMatrix();
+  translate(width,0);
+  scale(-1,1);
+  image(mig,0,0);
+  popMatrix();
+  
+  // simetria pero no perfecta
+  /*
+  for(int i=0; i<zones.size(); i++) {
+    Rectangle z = zones.get(i);
+    
+    pushMatrix();
+    translate(width-mida-z.x, z.y);
+    noStroke();
+    noFill();
+    strokeWeight(4);
+    trocet(2*z.w, z.quin);
+    popMatrix();
+  
+    //z.drawR(); // debug
+  }
+  */
 }
 
 void keyPressed() {
@@ -83,10 +74,9 @@ void keyPressed() {
     pantallazo();
   }
   else if(key == 'r'){ // nous trocets
-    for(int i=0; i<zones.size(); i++) {
-      Rectangle z = zones.get(i);
-      z.quin = (int)random(0,4);
-    }
+    zones.clear();
+    creaZones();
+    assignaTrocet();
   }
 }
 
@@ -329,5 +319,45 @@ class Rectangle {
     fill(0,155,155);
     text(quin, x+10, y+15);
     text(prob, x+10, y+25);
+  }
+}
+
+void creaZones(){
+  for(int i=0; i<quantiW; i++){
+    for(int j=0; j<quantiH; j++){
+      zones.add(new Rectangle(i*mida,j*mida, mida,mida));
+    }
+  }
+  
+  for (int i=zones.size()-1; i>= 0; i--){
+    Rectangle z = zones.get(i);
+    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 0.9,0.);
+    z.prob = prob;
+    if (random(1) > prob) { // subdivideix
+      zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.remove(i);  
+    }
+  } 
+  for (int i=zones.size()-1; i>= 0; i--){
+    Rectangle z = zones.get(i);
+    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 0.8,0.);
+    z.prob = prob;
+    if (random(1) > prob) { // subdivideix
+      zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.add(new Rectangle(z.x+z.w*0.5,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
+      zones.remove(i);  
+    }
+  }
+}
+
+void assignaTrocet(){
+  for(int i=0; i<zones.size(); i++) {
+    Rectangle z = zones.get(i);
+    z.quin = (int)random(0,4);
   }
 }
