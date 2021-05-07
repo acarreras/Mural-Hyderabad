@@ -67,10 +67,10 @@ getting closer
 ![centdotze](/captures/mural_2021_05_07_20_09_53.png)
 ![centtretze](/captures/mural_2021_05_07_20_09_58.png)
 ![centdisset](/captures/mural_2021_05_07_20_10_04.png)
-![centdivuit](/captures/mural_2021_05_07_20_10_06.png)
 ![centvintiu](/captures/mural_2021_05_07_20_10_15.png)
 
 ## Generative birds appearing
+![centdivuit](/captures/mural_2021_05_07_20_10_06.png)
 ![centvintiu](/captures/mural_2021_05_07_20_09_49.png)
 
 
