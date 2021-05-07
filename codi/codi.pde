@@ -14,6 +14,7 @@ void setup() {
   size(1340, 510); // 670cm x 255cm
   frameRate(8);
   
+  // crea zones
   for(int i=0; i<quantiW; i++){
     for(int j=0; j<quantiH; j++){
       zones.add(new Rectangle(i*mida,j*mida, mida,mida));
@@ -22,7 +23,9 @@ void setup() {
   
   for (int i=zones.size()-1; i>= 0; i--){
     Rectangle z = zones.get(i);
-    if (random(1) > 0.5) { // subdivideix
+    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 1.,0.);
+    z.prob = prob;
+    if (random(1) > prob) { // subdivideix
       zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
       zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
       zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
@@ -30,17 +33,24 @@ void setup() {
       zones.remove(i);  
     }
   } 
-  
   for (int i=zones.size()-1; i>= 0; i--){
     Rectangle z = zones.get(i);
-    if (random(1) > 0.8) { // subdivideix
+    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 1.,0.);
+    z.prob = prob;
+    if (random(1) > prob) { // subdivideix
       zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
       zones.add(new Rectangle(z.x+z.w*0.5,z.y, z.w*0.5,z.h*0.5));
       zones.add(new Rectangle(z.x,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
       zones.add(new Rectangle(z.x+z.w*0.5,z.y+z.h*0.5, z.w*0.5,z.h*0.5));
       zones.remove(i);  
     }
-  } 
+  }
+  
+  // assigna trocet
+  for(int i=0; i<zones.size(); i++) {
+    Rectangle z = zones.get(i);
+    z.quin = (int)random(0,4);
+  }
 }
 
 void draw() {
@@ -54,11 +64,11 @@ void draw() {
     noStroke();
     noFill();
     strokeWeight(4);
-    trocet(2*z.w, (int)random(2,4));
+    trocet(2*z.w, z.quin);
     popMatrix();
   
     //z.drawR(); // debug
-  } 
+  }
 }
 
 void keyPressed() {
@@ -69,6 +79,12 @@ void keyPressed() {
   else if (key == ' ') {
     //efectePaper(0,0, width,height, 40);
     pantallazo();
+  }
+  else if(key == 'r'){ // nous trocets
+    for(int i=0; i<zones.size(); i++) {
+      Rectangle z = zones.get(i);
+      z.quin = (int)random(0,4);
+    }
   }
 }
 
@@ -283,6 +299,8 @@ class Rectangle {
   float h;
   float cX;
   float cY;
+  int quin = 99;
+  float prob = 0.; // debug
   
   Rectangle(float _x, float _y, float _w, float _h){
     x = _x;
@@ -303,8 +321,11 @@ class Rectangle {
   
   void drawR(){ // debug
     noFill();
-    stroke(255,255,0);
+    stroke(0,255,255);
     strokeWeight(0.5);
     rect(x,y, w,h);
+    fill(0,155,155);
+    text(quin, x+10, y+15);
+    text(prob, x+10, y+25);
   }
 }
