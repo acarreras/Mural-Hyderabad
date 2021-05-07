@@ -48,7 +48,6 @@ getting closer
 
 ## Bigger patterns in the center, smaller at the edges
 ![vintidos](/captures/mural_2021_05_07_19_11_25.png)
-![vintitres](/captures/mural_2021_05_07_19_11_52.png)
 ![vintiquatre](/captures/mural_2021_05_07_19_12_03.png)
 ![vinticinc](/captures/mural_2021_05_07_19_12_10.png)
 ![vintisis](/captures/mural_2021_05_07_19_12_14.png)
