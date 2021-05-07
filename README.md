@@ -60,27 +60,17 @@ getting closer
 
 ## Symmetry
 ![centun](/captures/mural_2021_05_07_20_09_10.png)
-![centdos](/captures/mural_2021_05_07_20_09_19.png)
 ![centtres](/captures/mural_2021_05_07_20_09_20.png)
-![centquatre](/captures/mural_2021_05_07_20_09_27.png)
-![centcinc](/captures/mural_2021_05_07_20_09_22.png)
 ![centsis](/captures/mural_2021_05_07_20_09_29.png)
-![centset](/captures/mural_2021_05_07_20_09_31.png)
-![centvuit](/captures/mural_2021_05_07_20_09_37.png)
 ![centnou](/captures/mural_2021_05_07_20_09_41.png)
 ![centdeu](/captures/mural_2021_05_07_20_09_43.png)
-![centonze](/captures/mural_2021_05_07_20_09_49.png)
 ![centdotze](/captures/mural_2021_05_07_20_09_53.png)
 ![centtretze](/captures/mural_2021_05_07_20_09_58.png)
-![centcatorze](/captures/mural_2021_05_07_20_10_00.png)
-![centquinze](/captures/mural_2021_05_07_20_10_01.png)
-![centsetze](/captures/mural_2021_05_07_20_10_02.png)
 ![centdisset](/captures/mural_2021_05_07_20_10_04.png)
 ![centdivuit](/captures/mural_2021_05_07_20_10_06.png)
-![centdinou](/captures/mural_2021_05_07_20_10_08.png)
-![centvint](/captures/mural_2021_05_07_20_10_14.png)
 ![centvintiu](/captures/mural_2021_05_07_20_10_15.png)
 
+## Generative birds appearing
 ![centvintiu](/captures/mural_2021_05_07_20_09_49.png)
 
 
