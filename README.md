@@ -53,3 +53,9 @@ getting closer
 ![vinticinc](/captures/mural_2021_05_07_19_12_10.png)
 ![vintisis](/captures/mural_2021_05_07_19_12_14.png)
 
+## Fine tunning colors
+![vintiset](/captures/mural_2021_05_07_19_38_42.png)
+![vintivuit](/captures/mural_2021_05_07_19_38_51.png)
+![vintinou](/captures/mural_2021_05_07_19_39_04.png)
+
+

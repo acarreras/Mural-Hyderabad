@@ -1,4 +1,4 @@
-int colors[] = {#FAAE7E, #f7803c, #ed4627, #2e0d23, #f8e4c1};
+int colors[] = {#FAAE7E, #5F1B49, #ed4627, #2e0d23, #FFF5E3};
 color c1 = colors[0];
 color c2 = colors[1];
 color c3 = colors[2];
@@ -23,7 +23,7 @@ void setup() {
   
   for (int i=zones.size()-1; i>= 0; i--){
     Rectangle z = zones.get(i);
-    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 1.,0.);
+    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 0.9,0.);
     z.prob = prob;
     if (random(1) > prob) { // subdivideix
       zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
@@ -35,7 +35,7 @@ void setup() {
   } 
   for (int i=zones.size()-1; i>= 0; i--){
     Rectangle z = zones.get(i);
-    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 1.,0.);
+    float prob = map(abs(width*.5-mida - z.x), 0, width*0.5, 0.8,0.);
     z.prob = prob;
     if (random(1) > prob) { // subdivideix
       zones.add(new Rectangle(z.x,z.y, z.w*0.5,z.h*0.5));
@@ -51,6 +51,8 @@ void setup() {
     Rectangle z = zones.get(i);
     z.quin = (int)random(0,4);
   }
+  
+  desplacaColorsEnrera();
 }
 
 void draw() {
