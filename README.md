@@ -1,4 +1,4 @@
-# Mural
+# Mural Hyderabad
 Generative mural drawing created with code and love.
 
 Anna Carrers, Barcelona.
@@ -72,4 +72,12 @@ getting closer
 ![centdivuit](/captures/mural_2021_05_07_20_10_06.png)
 ![centvintiu](/captures/mural_2021_05_07_20_09_49.png)
 
+## Finding birds!
+![ocells81](/captures/ocells/mural81_2021_05_16_12_12_15.png)
+![ocells119](/captures/ocells/mural119_2021_05_15_18_01_40.png)
+![ocells180](/captures/ocells/mural180_2021_05_15_18_01_53.png)
+![ocells254](/captures/ocells/mural254_2021_05_15_18_02_09.png)
+![ocells264](/captures/ocells/mural264_2021_05_15_18_02_11.png)
+![ocells311](/captures/ocells/mural311_2021_05_15_18_02_22.png)
+![ocells377](/captures/ocells/mural377_2021_05_15_18_02_36.png)
 
