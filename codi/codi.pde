@@ -1,6 +1,4 @@
-import processing.svg.*;
-
-int colors[] = {#FAAE7E, #5F1B49, #ed4627, #2e0d23, #FFF5E3};
+int colors[] = {#FAAE7E, #461435, #ed4627, #5F1B49, #FFF5E3};
 color c1 = colors[0];
 color c2 = colors[1];
 color c3 = colors[2];
@@ -12,10 +10,13 @@ int quantiW = 5;
 int quantiH = 3;
 ArrayList<Rectangle> zones = new ArrayList<Rectangle>();
 
+int seed = 1;
+
 void setup() {
   size(1340, 510); // 670cm x 255cm
   //frameRate(8);
   
+  randomSeed(seed);
   creaZones();
   assignaTrocet();
   desplacaColorsEnrera();
@@ -70,7 +71,6 @@ void keyPressed() {
   else if (key == '+') desplacaColorsEndavant();
   else if (key == '-') desplacaColorsEnrera();
   else if (key == ' ') {
-    //efectePaper(0,0, width,height, 40);
     pantallazo();
   }
   else if(key == 'r'){ // nous trocets
@@ -112,24 +112,9 @@ void pantallazo(){
   String d = year() + "_" + nf(month(),2) + "_"  + nf(day(),2) + "_";
   d = d + nf(hour(),2) + "_"  + nf(minute(),2) + "_"  + nf(second(),2);
   
-  String filename = "./../captures/mural" + "_" + d + ".png";
+  String filename = "./../captures/mil/mural" + seed + "_" + d + ".png";
   println("  --- pantallazo capturat");
   save(filename);
-}
-
-void efectePaper(float x, float y, float w, float h, int alpha){
-  pushMatrix();
-  pushStyle();
-  translate(x,y);
-  noStroke();
-  for (int i = 0; i<w-1; i+=2) {
-    for (int j = 0; j<h-1; j+=2) {
-      fill(random(125-11, 125+11), alpha);
-      rect(i, j, 2, 2);
-    }
-  }
-  popMatrix();
-  popStyle();
 }
 
 void trocet(float m, int n){
@@ -280,7 +265,7 @@ void trocetV(float m, float m50, float m25, float m23, float m13){
   circle(m50,lerp(m25,m-m25,0.75), m13*0.35);
   // decoracions++
   fill(cc5);
-  ellipse(m25,m25, m13*0.5,m13*0.5);
+  ellipse(m25,m25, m13*0.7,m13*0.7);
   popStyle();
 }
 
